@@ -40,6 +40,8 @@ def upload_file():
             Street=df['Street'][i]
             City=df['City'][i]
             State=df['Province / State'][i]
+            SKU=df['SKU'][i]
+            date=df['order create time'][i]
             bar_class = barcode.get_barcode_class('Gs1_128')
             number = BarcodeNumber
             writer=ImageWriter()
@@ -64,7 +66,7 @@ def upload_file():
             # Shows the image in image viewer
             # im1.show()
             BarcodeFileName=FileName+'.png'
-            tmp={"FirstName":FirstName,"LastName":LastName,"Street":Street,"City":City,"State":State,"BarcodeNumber":BarcodeNumber,"OrderID":OrderID,"BarcodeFileName":BarcodeFileName}
+            tmp={"FirstName":FirstName,"LastName":LastName,"Street":Street,"City":City,"State":State,"BarcodeNumber":BarcodeNumber,"OrderID":OrderID,"BarcodeFileName":BarcodeFileName,"SKU":SKU,"date":date}
             FinalOutput.append(tmp)
         df1 = pd.DataFrame(FinalOutput)
         df1.to_csv('static/upload/'+ExcelFileName+'-output.csv')
@@ -89,6 +91,17 @@ def upload_file():
         pdfkit.from_string(htmlData, 'static/upload/'+ExcelFileName+'.pdf',options=options)
 
     return render_template('home.html', file=ExcelFileName+'.pdf')
+
+@app.route('/test')
+def test():
+    fileName=session.get('fileExe')
+        # print(fileName)
+    df=pd.read_csv(r'static/upload/'+fileName)
+    return render_template(
+            "file.html",
+            data=df.values.tolist())
+
+
 
 
 if __name__ =="__main__":
