@@ -12,13 +12,15 @@
             margin: 0px;
         }
     </style>
-    <title>Hello, world!</title>
+    <title>PDF File</title>
   </head>
   <body>
-    
+   
+  
     <div class="container">
-        <div class="row">
-           <table border="1">
+        {% for dt in data %}
+        <div class="row d-flex justify-content-center">
+           <table border="1" style="width:450px; height: 350px;">
             <tr>
                 <td><h1 style="font-size: 80px; text-align: center;">P</h1></td>
                 <td style="vertical-align: top; text-align: center;"><b>US POSTAGE & FEES PAID</b><p style="font-weight: 200; margin-top:0px; font-size:12px">1 LB PRIORITY MAIL RATE</p> <span style="vertical-align: bottom; margin-left: 300px; margin-top: 100px; font-size: 9px;">06-16-2022</span></td>
@@ -32,54 +34,25 @@
             </tr>
             <tr>
                 <th style="vertical-align: center; text-align: center;">Ship TO:</th>
-                <td style="padding-left: 10px;">FRANK MURE <br>187 OVERBROOK AVE <br> TONAWANDA NY 14150-8304</td>
+                <td style="padding-left: 10px;">{{ dt[1] }} {{ dt[2] }}<br>{{ dt[3] }} <br> {{ dt[4] }}</td>
             </tr>
             <tr style="border-top:10px solid black; border-bottom:10px solid black">
                 <td colspan="2" style="vertical-align: center; text-align: center;">
                     <h5>USPS TRACKING #</h5>
-                    <img style="height: 100px;" src="{{ url_for('static', filename='new_code1.png') }}"  alt="">
+                    <img style="height: 115px;" src="/static/upload//{{ dt[8] }}"  alt="">
+                    <h5 style="padding: 2px;">{{ dt[6] }}</h5>
                 </td>
             </tr>
             <tr style="vertical-align: center; text-align: center;">
                 <td colspan="2">
-                    <b style="border-right: 2px solid black; padding: 5px;">Order: 92001956754186920198019464</b> SKU(COUNT)
+                    <b style="border-right: 2px solid black; padding: 5px;">Order: {{ dt[7] }}</b> SKU(COUNT)
                 </td>
             </tr>
            </table>
         </div>
         <br>
         <hr>
-        <br>
-        <div class="row">
-            <table border="1">
-                <tr>
-                    <td><h1 style="font-size: 80px; text-align: center;">P</h1></td>
-                    <td style="vertical-align: top; text-align: center;"><b>US POSTAGE & FEES PAID</b><p style="font-weight: 200; margin-top:0px; font-size:12px">1 LB PRIORITY MAIL RATE</p> <span style="vertical-align: bottom; margin-left: 300px; margin-top: 100px; font-size: 9px;">06-16-2022</span></td>
-                </tr>
-                <tr>
-                    <th colspan="2" style="vertical-align: top; text-align: center; font-size: 25px;">PRIORITY MAIL 3-DAY<sup>TM</sup></th>
-                </tr>
-                <tr>
-                    <th style="vertical-align: center; text-align: center;">Ship From:</th>
-                    <td style="padding-left: 10px;">TWOSE PRTLE <br> 116 E LIVE OAK AVE <br> ARCADIA CA 91006  </td>
-                </tr>
-                <tr>
-                    <th style="vertical-align: center; text-align: center;">Ship TO:</th>
-                    <td style="padding-left: 10px;">FRANK MURE <br>187 OVERBROOK AVE <br> TONAWANDA NY 14150-8304</td>
-                </tr>
-                <tr style="border-top:10px solid black; border-bottom:10px solid black">
-                    <td colspan="2" style="vertical-align: center; text-align: center;">
-                        <h5>USPS TRACKING #</h5>
-                        <img style="height: 100px;" src="{{ url_for('static', filename='new_code1.png') }}"  alt="">
-                    </td>
-                </tr>
-                <tr style="vertical-align: center; text-align: center;">
-                    <td colspan="2">
-                        <b style="border-right: 2px solid black; padding: 5px;">Order: 92001956754186920198019464</b> SKU(COUNT)
-                    </td>
-                </tr>
-               </table>
-        </div>
+        {% endfor %}
     </div>
 
 
