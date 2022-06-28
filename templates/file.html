@@ -39,7 +39,7 @@
             <tr style="border-top:10px solid black; border-bottom:10px solid black">
                 <td colspan="2" style="vertical-align: center; text-align: center;">
                     <h5>USPS TRACKING #</h5>
-                    <img style="height: 115px;" src="/static/upload//{{ dt[8] }}"  alt="">
+                    <img style="height: 115px;" src="http://127.0.0.1:5000/static/upload/{{ dt[8] }}"  alt="">
                     <h5 style="padding: 2px;">{{ dt[6] }}</h5>
                 </td>
             </tr>
@@ -52,6 +52,7 @@
         </div>
         <br>
         <hr>
+        <br>
         {% endfor %}
     </div>
 

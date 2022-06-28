@@ -68,36 +68,27 @@ def upload_file():
             FinalOutput.append(tmp)
         df1 = pd.DataFrame(FinalOutput)
         df1.to_csv('static/upload/'+ExcelFileName+'-output.csv')
+        fileName=session.get('fileExe')
+        # print(fileName)
+        df=pd.read_csv(r'static/upload/'+fileName)
+        options = {
+            'page-height': '250',
+            'page-width': '105',
+            'margin-top': '0.1in',
+            'margin-right': '0.1in',
+            'margin-bottom': '0.1in',
+            'margin-left': '0.1in',
+            'encoding': "UTF-8",
+            'custom-header': [('Accept-Encoding', 'gzip')],
+            'no-outline': None
+            }
+        htmlData = render_template(
+            "file.html",
+            data=df.values.tolist())
+        # print(html)
+        pdfkit.from_string(htmlData, 'static/upload/'+ExcelFileName+'.pdf',options=options)
 
-    return "test"
-
-@app.route("/test")
-def test():
-    print(session.get("name"))
-    options = {
-
-        'page-height': '250',
-        'page-width': '105',
-        'margin-top': '0.1in',
-        'margin-right': '0.1in',
-        'margin-bottom': '0.1in',
-        'margin-left': '0.1in',
-        'encoding': "UTF-8",
-        'custom-header': [('Accept-Encoding', 'gzip')],
-        'no-outline': None
-        }
-    pdfkit.from_url('http://127.0.0.1:5000/file/','test.pdf',options=options)
-    return "test"
-
-@app.route('/file')
-def file():
-    fileName=session.get('fileExe')
-    print(fileName)
-    df=pd.read_csv(r'static/upload/'+fileName)
-    print(df)
-    return render_template('file.html', data=df.values.tolist())
-
-        
+    return render_template('home.html', file=ExcelFileName+'.pdf')
 
 
 if __name__ =="__main__":
