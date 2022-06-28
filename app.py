@@ -34,7 +34,7 @@ def upload_file():
             OrderID=df['Order ID'][i]
             PostalCode=df['Postal code'][i]
             TrackingNumber=df['Tracking number'][i]
-            BarcodeNumber='420'+str(PostalCode)+'94'+str(TrackingNumber)
+            BarcodeNumber='420'+str(PostalCode)+str(TrackingNumber)
             FirstName=df['First name'][i]
             LastName=df['Last name'][i]
             Street=df['Street'][i]
